@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production --config webpack.config.js",
-    "watch:client": "webpack --mode development --config webpack.config.js --watch --progress --display-chunks --devtool source-map",
-    "watch": "npm-run-all -p watch:*",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "webpack": "npm-run-all -p webpack:*",
+    "webpack:client": "webpack --watch --config webpack/client.config.js",
+    "webpack:server": "webpack --watch --config webpack/server.config.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.4",
@@ -26,9 +27,12 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.17.2",
     "npm-run-all": "^4.1.2",
     "webpack": "^4.2.0",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^2.0.13",
+    "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
     "express": "^4.16.3",
