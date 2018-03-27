@@ -1,27 +1,34 @@
 # README
 
-## Installation
+First of all, make sure you already installed both `git` and `node.js`.
 
-Installer les dépendances :
+Then, get the entire project by cloning it from GitHub:
 
 ```
-cd cars/
+git clone http://github.com/jeromeludmann/cars
+```
+
+Enter within the new created folder and install all needed dependencies:
+
+```
+cd cars
 npm install
 ```
 
-## Développement
-
-Démarrer le build automatique :
+When it's done, just start the dev workflow by typing:
 
 ```
-npm run watch
+npm run dev
 ```
 
-Cette commande surveille chaque changement de code et recompile les parties nécessaires automatiquement.
+This following tasks will automatically work without any handling on your part:
 
-Lors d'un `npm run watch`, deux sous commandes s'exécutent en parallèle :
+* webpack workflow (including eslint and babel)
+* server monitoring (restart on change)
 
-* le watch du front `watch:client`
-* le watch du back `watch:server`
+See `scripts` entry from `package.json` for more details.
 
-Si besoin, il est possible de lancer les builds séparément avec `npm run watch:client` et `npm run watch:server`.
+Once the tasks are fully started, you can write code either in `src/client` (React components) or `src/server` depending to what you want to develop.
+
+Finally, go to http://localhost:8080 to check what you done.
+You can change the port, see `config/app.json`.
