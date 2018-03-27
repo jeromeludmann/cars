@@ -1,4 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
+import Hello from 'Client/Hello'
 
-render(<div>Hello world</div>, document.getElementById('react-root-container'))
+render(<Hello />, document.getElementById('react-root-container'))

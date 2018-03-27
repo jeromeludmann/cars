@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "allowSyntheticDefaultImports": false,
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "Config/*": ["config/*"],
+      "Client/*": ["src/client/*"],
+      "Server/*": ["src/server/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

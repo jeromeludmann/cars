@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "webpack": "npm-run-all -p webpack:*",
-    "webpack:client": "webpack --watch --config webpack/client.config.js",
-    "webpack:server": "webpack --watch --config webpack/server.config.js"
+    "webpack": "webpack --watch --config webpack/dev.config.js --progress",
+    "start": "nodemon -w dist/bundle.js -x 'node dist/server/bundle.js'",
+    "dev": "npm-run-all -s clean -p webpack start"
   },
   "keywords": [],
   "author": "",

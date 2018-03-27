@@ -1,18 +1,15 @@
 import path from 'path'
 import express from 'express'
-import { port } from '../../cars.config.json' // TODO fix relative path
+import { port } from 'Config/app.json'
 
 const app = express()
 
 // configure template engine
 app.set('view engine', 'ejs')
-app.set('views', path.resolve(__dirname, 'templates'))
+app.set('views', path.resolve('src', 'server', 'templates'))
 
 // add middlewares
-app.use(
-  '/assets',
-  express.static(path.resolve(__dirname, '..', '..', 'dist', 'assets')) // TODO fix relative path
-)
+app.use('/assets', express.static(path.resolve('dist', 'client')))
 
 // handle routes
 app.get('/', (req, res) => {
