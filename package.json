@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "webpack --progress --config webpack/dev.config.js",
-    "start": "node dist/server.js",
+    "build": "webpack --config webpack/dev.config.js",
+    "start": "node -r source-map-support/register dist/server.js",
     "watch:build": "npm-run-all -s 'build -- --watch'",
     "watch:start": "nodemon -w dist/server.js -x 'npm-run-all -s start'",
     "dev": "npm-run-all -p watch:*",
@@ -37,8 +37,10 @@
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "source-map-support": "^0.5.4"
   }
 }
