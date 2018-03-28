@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
-import { port } from 'Config/app.json'
+
+import config from 'Server/config'
 import api from 'Server/api'
 
 const app = express()
@@ -25,6 +26,10 @@ app.get('*', (req, res) => {
   res.status(404).send('<h1>Not Found</h1>')
 })
 
-app.listen(port, () => {
-  console.log(`Server ready on http://localhost:${port}`)
+app.listen(config.httpServer['port'], config.httpServer['interface'], () => {
+  console.log(
+    `Server is listening on ${config.httpServer['interface']}:${
+      config.httpServer['port']
+    }`
+  )
 })

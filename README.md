@@ -31,4 +31,4 @@ See `scripts` entry from `package.json` for more details.
 Once the tasks are fully started, you can write code either in `src/client` (React components) or `src/server` depending to what you want to develop.
 
 Finally, go to http://localhost:8080 to check what you done.
-You can change the port, see `config/app.json`.
+You can change the port, see `config/development.json`.
