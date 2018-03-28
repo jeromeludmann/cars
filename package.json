@@ -2,16 +2,18 @@
   "name": "cars",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "webpack": "webpack --watch --config webpack/dev.config.js --progress",
-    "start": "nodemon -w dist/bundle.js -x 'node dist/server/bundle.js'",
-    "dev": "npm-run-all -s clean -p webpack start"
+    "build": "webpack --progress --config webpack/dev.config.js",
+    "start": "node dist/server.js",
+    "watch:build": "npm-run-all -s 'build -- --watch'",
+    "watch:start": "nodemon -w dist/server.js -x 'npm-run-all -s start'",
+    "dev": "npm-run-all -p watch:*",
+    "predev": "npm-run-all -s clean build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

@@ -9,7 +9,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.resolve('src', 'server', 'templates'))
 
 // add middlewares
-app.use('/assets', express.static(path.resolve('dist', 'client')))
+app.use('/assets', express.static(path.resolve('dist', 'assets')))
 
 // handle routes
 app.get('/', (req, res) => {
