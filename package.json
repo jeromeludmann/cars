@@ -4,12 +4,10 @@
   "description": "",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "webpack --config webpack/dev.config.js",
-    "start": "node -r source-map-support/register dist/server.js",
-    "watch:build": "npm-run-all -s 'build -- --watch'",
-    "watch:start": "nodemon -w dist/server.js -x 'npm-run-all -s start'",
-    "dev": "npm-run-all -p watch:*",
-    "predev": "npm-run-all -s clean build"
+    "build": "webpack --config webpack/shared.config.js",
+    "start": "node source-map-support/register dist/server.js",
+    "watch:build": "npm run build -- --watch",
+    "watch:start": "nodemon -w dist/server.js dist/server.js"
   },
   "keywords": [],
   "author": "",

@@ -14,6 +14,11 @@ const sharedConfig = {
       Server: path.resolve(__dirname, '..', 'src', 'server')
     }
   },
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 300,
+    poll: 500
+  },
   module: {
     rules: [
       {

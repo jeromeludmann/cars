@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  build:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: npm run watch:build
+    volumes:
+      - ../:/usr/src/cars/
+      - dist:/usr/src/cars/dist/:rw
+      - /usr/src/cars/node_modules/
+    environment:
+      - NODE_ENV=development
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: npm run watch:start
+    volumes:
+      - dist:/usr/src/cars/dist/:ro
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=3006
+    expose:
+      - 3006
+    depends_on: 
+      - build
+
+  web:
+    image: nginx
+    volumes:
+      - ../docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - dist:/usr/src/cars/dist/:ro
+    environment:
+      - NGINX_HOST=cars
+      - NGINX_PORT=80
+    ports:
+      - "8080:80"
+    links:
+      - api
+
+volumes:
+  dist:
