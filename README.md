@@ -1,51 +1,56 @@
 # README
 
-_Only for development purpose._
-
 ## Setting up
 
-First of all, make sure you already installed both `git` and `node.js`.
+First of all, make sure you already installed:
 
-Then, get the entire project by cloning it from GitHub:
+* Git
+* Docker
+
+Then, get the entire project by cloning it from Github:
 
 ```
 git clone http://github.com/jeromeludmann/cars
 ```
 
-Enter within the new created folder and install all needed dependencies:
+## Get ready to develop
+
+In order to start to develop, just run the command below from the root of the newly created folder:
 
 ```
-cd cars
-npm install
+./dc up
 ```
 
-When it's done, you can go to the next step.
+Since some things will have to be done, like Docker images building and required dependencies installing, it may take a while the first time you will execute it (but _much faster_ next time).
 
-## Development workflow
+That being said, `./dc` (which is a shortcut for `docker-compose --file docker/compose.yml`) will automatically run for you the services below:
 
-In order to start developing, just run the development workflow:
+| Service  | Description                                                                                     |
+| -------: | ----------------------------------------------------------------------------------------------- |
+|    build | Run Webpack. Watch and build project on changes.                                                |
+|      api | Run Nodemon. Watch and restart API server if needed.                                            |
+|      web | Run Nginx. Used as a reverse proxy and as a front server that provides direct access to assets. |
 
-```
-npm run dev
-```
-
-This following tasks will automatically work without any handling on your part:
-
-* webpack workflow (including eslint and babel)
-* server monitoring (restart on change)
-
-See `scripts` entry from `package.json` for more details.
-
-Once the tasks are fully started, you can write code either in `src/client` (React components) or `src/server` depending to what you want to develop.
+Once these services are fully started, you can write code either in `src/client/` or `src/server/` depending to what you want to develop (React or Node).
 
 Finally, go to http://localhost:8080 to check what you done.
-You can change the port, see `config/development.json`.
 
-## API endpoints
+You can also change the Nginx port in `docker/compose.yml`:
 
-| Method | URL               | Description            |
-| -----: | :---------------- | :--------------------- |
-|    GET | /api/cars         | Get all cars           |
-|    GET | /api/cars/{name}  | Get a specified car    |
-|   POST | /api/cars         | Add a new car          |
-| DELETE |  /api/cars/{name} | Remove an existing car |
+```
+services:
+    web:
+        ports:
+            - "8080:80"
+```
+
+## API
+
+Available endpoints:
+
+| Method | URL            | Description            |
+| -----: | :------------- | :--------------------- |
+|    GET | /api/cars      | Get all cars           |
+|    GET | /api/cars/{id} | Get a specified car    |
+|   POST | /api/cars      | Add a new car          |
+| DELETE | /api/cars/{id} | Remove an existing car |

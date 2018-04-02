@@ -1,7 +1,6 @@
 import path from 'path'
 import express from 'express'
 
-import config from 'Server/config'
 import api from 'Server/api'
 
 const app = express()
@@ -11,7 +10,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.resolve('src', 'server'))
 
 // add middlewares
-app.use('/assets', express.static(path.resolve('dist', 'assets')))
+// ...
 
 // handle html routes
 app.get('/', (req, res) => {
@@ -23,13 +22,9 @@ app.use('/api', api)
 
 // handle 404
 app.get('*', (req, res) => {
-  res.status(404).send('<h1>Not Found</h1>')
+  res.status(404).send('<h1>Not found</h1>')
 })
 
-app.listen(config.httpServer['port'], config.httpServer['interface'], () => {
-  console.log(
-    `Server is listening on ${config.httpServer['interface']}:${
-      config.httpServer['port']
-    }`
-  )
+app.listen(process.env.NODE_PORT, () => {
+  console.log(`API server is listening on ${process.env.NODE_PORT}`)
 })
