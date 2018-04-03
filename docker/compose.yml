@@ -7,9 +7,9 @@ services:
       dockerfile: docker/Dockerfile
     command: npm run watch:build
     volumes:
-      - ../:/usr/src/cars/
-      - dist:/usr/src/cars/dist/:rw
+      - ../:/usr/src/cars/:ro
       - /usr/src/cars/node_modules/
+      - ../dist:/usr/src/cars/dist/:rw
     environment:
       - NODE_ENV=development
 
@@ -19,7 +19,8 @@ services:
       dockerfile: docker/Dockerfile
     command: npm run watch:start
     volumes:
-      - dist:/usr/src/cars/dist/:ro
+      - ../:/usr/src/cars/:ro
+      - /usr/src/cars/node_modules/
     environment:
       - NODE_ENV=development
       - NODE_PORT=3006
@@ -32,7 +33,7 @@ services:
     image: nginx
     volumes:
       - ../docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - dist:/usr/src/cars/dist/:ro
+      - ../dist/assets/:/usr/share/nginx/html/:ro
     environment:
       - NGINX_HOST=cars
       - NGINX_PORT=80
@@ -40,6 +41,3 @@ services:
       - "8080:80"
     links:
       - api
-
-volumes:
-  dist:
