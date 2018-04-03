@@ -1,9 +1,6 @@
 const path = require('path')
 
-const clientConfig = require('./client.config')
-const serverConfig = require('./server.config')
-
-const sharedConfig = {
+module.exports = {
   mode: 'development',
   devtool: 'source-map',
   resolve: {
@@ -35,8 +32,3 @@ const sharedConfig = {
     ]
   }
 }
-
-module.exports = [
-  { ...sharedConfig, ...clientConfig },
-  { ...sharedConfig, ...serverConfig }
-]

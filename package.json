@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "webpack --config webpack/shared.config.js",
+    "build": "webpack --config webpack/",
     "start": "node source-map-support/register dist/server.js",
     "watch:build": "npm run build -- --watch",
     "watch:start": "nodemon -w dist/server.js dist/server.js"
