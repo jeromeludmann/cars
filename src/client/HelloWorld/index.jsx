@@ -1,8 +1,15 @@
 import React from 'react'
-import { title, shout } from './style.css'
+import { HelloWorld } from './style/styled-components.js'
+import { bolder, lighter } from './style/css-modules.css'
 
-export default ({ name = 'world' }) => (
-  <h1 className={title}>
-    Hello <strong className={shout}>{name}</strong>!
-  </h1>
+export default ({ name = 'World' }) => (
+  <HelloWorld>
+    <h1>
+      Hello <strong className={bolder}>{name}</strong>!
+    </h1>
+
+    <p>
+      I am a <em className={lighter}>dumb</em> component
+    </p>
+  </HelloWorld>
 )
