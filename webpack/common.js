@@ -6,7 +6,6 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
     alias: {
-      Config: path.resolve(__dirname, '..', 'config'),
       Client: path.resolve(__dirname, '..', 'src', 'client'),
       Server: path.resolve(__dirname, '..', 'src', 'server')
     }

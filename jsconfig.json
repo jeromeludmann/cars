@@ -5,7 +5,6 @@
     "jsx": "react",
     "baseUrl": "./",
     "paths": {
-      "Config/*": ["config/*"],
       "Client/*": ["src/client/*"],
       "Server/*": ["src/server/*"]
     }
