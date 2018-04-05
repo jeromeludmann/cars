@@ -6,7 +6,8 @@ _All is subject to change._
 2.  [Get ready to develop](#get-ready-to-develop)
 3.  [Git workflow](#git-workflow)
 4.  [API](#api)
-5.  [TODO](#todo)
+5.  [Microservice architecture](#microservice-architecture)
+6.  [TODO](#todo)
 
 ## Setting up
 
@@ -113,6 +114,34 @@ Available endpoints:
 |   POST | /api/cars      | Add a new car          |
 | DELETE | /api/cars/{id} | Remove an existing car |
 
+## Microservice architecture
+
+See below the current microservice architecture.
+
+```
+                       Nginx                  Node.js
+
+                                       +------------------+
+                                       | REST API         |
+                                       |                  |
+                                       | /api/*           |
+                                       +------------------+
+                                           |          |
+                +------------------+       |          |       +----------+
+                | Reverse proxy    |-------+          +-------| Database |
+           +----|                  |                          +----------+
+           |    | /*               |-------+
+           |    +------------------+       |
+           |                               |
+Browser ---+                           +------------------+
+           |                           | Server rendering |
+           |    +------------------+   |                  |
+           |    | Static assets    |   | /*               |
+           +----|                  |   +------------------+
+                | /assets/*        |
+                +------------------+
+```
+
 ## TODO
 
 ### Required
@@ -131,3 +160,7 @@ Available endpoints:
 
 * GraphQL (instead of REST API)
 * Server Sider Rendering (SSR)
+
+```
+
+```
