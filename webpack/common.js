@@ -46,7 +46,7 @@ module.exports = {
             options: {
               sourceMap: true,
               ident: 'postcss',
-              plugins: loader => []
+              plugins: loader => [require('postcss-cssnext')()]
             }
           }
         ]
