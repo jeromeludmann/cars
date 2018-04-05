@@ -1,5 +1,7 @@
 # README
 
+_All is subject to change._
+
 ## Setting up
 
 First of all, make sure you already installed:
@@ -73,34 +75,6 @@ git push origin user-list-feature
 ```
 
 On Github, select your branch `user-list-feature` and make your pull request (to `develop`).
-
-## API
-
-Available endpoints:
-
-| Method | URL            | Description            |
-| -----: | :------------- | :--------------------- |
-|    GET | /api/cars      | Get all cars           |
-|    GET | /api/cars/{id} | Get a specified car    |
-|   POST | /api/cars      | Add a new car          |
-| DELETE | /api/cars/{id} | Remove an existing car |
-
-and create your new branch from it:
-
-```
-git branch user-list-feature
-git checkout user-list-feature
-```
-
-You can now code within the branch `user-list-feature`.
-
-Once the job is done, add your changes, commit and push them:
-
-```
-git push origin user-list-feature
-```
-
-Go on Github and make your pull request from `user-list-feature` to `develop`.
 
 ## API
 
