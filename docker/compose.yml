@@ -19,7 +19,7 @@ services:
       dockerfile: docker/Dockerfile
     command: npm run watch:api
     volumes:
-      - ../dist/server/api/:/usr/src/cars/dist/server/api/:ro
+      - ../dist/services/api/:/usr/src/cars/dist/services/api/:ro
     environment:
       - NODE_ENV=development
       - NODE_PORT=3006
@@ -34,9 +34,9 @@ services:
       dockerfile: docker/Dockerfile
     command: npm run watch:ssr
     volumes:
-      - ../dist/server/ssr/:/usr/src/cars/dist/server/ssr/:ro
-      # that's not really good but it works
-      - ../src/server/ssr/html.ejs:/usr/src/cars/src/server/ssr/html.ejs:ro
+      - ../dist/services/ssr/:/usr/src/cars/dist/services/ssr/:ro
+      # I'm not sure that's the better way but it just works
+      - ../src/services/ssr/html.ejs:/usr/src/cars/src/services/ssr/html.ejs:ro
     environment:
       - NODE_ENV=development
       - NODE_PORT=3007

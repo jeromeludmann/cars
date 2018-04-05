@@ -5,11 +5,11 @@
   "scripts": {
     "clean": "rm -rf dist",
     "webpack": "webpack --config webpack/",
-    "api": "node -r source-map-support/register dist/server/api/bundle.js",
-    "ssr": "node -r source-map-support/register dist/server/ssr/bundle.js",
+    "api": "node -r source-map-support/register dist/services/api/bundle.js",
+    "ssr": "node -r source-map-support/register dist/services/ssr/bundle.js",
     "watch:webpack": "npm run webpack -- --watch",
-    "watch:api": "nodemon -w dist/server/api/bundle.js -x 'npm run api'",
-    "watch:ssr": "nodemon -w dist/server/ssr/bundle.js -x 'npm run ssr'"
+    "watch:api": "nodemon -w dist/services/api/bundle.js -x 'npm run api'",
+    "watch:ssr": "nodemon -w dist/services/ssr/bundle.js -x 'npm run ssr'"
   },
   "keywords": [],
   "author": "",

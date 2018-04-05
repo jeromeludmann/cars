@@ -5,7 +5,7 @@ const app = express()
 
 // configure template engine
 app.set('view engine', 'ejs')
-app.set('views', path.resolve('src', 'server', 'ssr'))
+app.set('views', path.resolve('src', 'services', 'ssr'))
 
 // handle html routes
 app.get('/', (req, res) => {

@@ -1,9 +1,9 @@
 const common = require('./common')
 const client = require('./client')
-const server = require('./server')
+const services = require('./services')
 
 module.exports = [
   { ...common, ...client },
-  { ...common, ...server('api') },
-  { ...common, ...server('ssr') }
+  { ...common, ...services('api') },
+  { ...common, ...services('ssr') }
 ]

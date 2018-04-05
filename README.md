@@ -5,7 +5,7 @@ _All is subject to change._
 1.  [Get ready](#get-ready)
 2.  [Develop](#develop)
 3.  [Git](#git)
-4.  [API](#api)
+4.  [API (from client side)](#api-from-client-side)
 5.  [Microservices](#microservices)
 6.  [TODO](#todo)
 
@@ -30,20 +30,28 @@ In order to start to develop, just run the command below from the root of the ne
 ./dc up
 ```
 
+_It's just a shortcut for `docker-compose --file docker/compose.yml`._
+
 Since some things will have to be done, like Docker images building and required dependencies installing, it may take a while the first time you will execute it (but _much faster_ next time).
 
-That being said, `./dc` (which is a shortcut for `docker-compose --file docker/compose.yml`) will automatically run for you the services below:
+That being said `./dc` will automatically run for you the services below:
 
 | Service    | Description                                                                         |
 | ---------- | ----------------------------------------------------------------------------------- |
-| `webpack`  | Watch and build project on changes (eslint, babel, postcss)                         |
+| `webpack`  | Watch and rebuild project on changes (eslint, babel, postcss)                       |
 | `node-api` | Watch and restart REST API server if needed                                         |
 | `node-ssr` | Watch and restart SSR server if needed                                              |
 | `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets |
 
 _See [Microservices](#microservices) for more details about this related architecture._
 
-Once these services are fully started, you can write code either in `src/client/` or `src/server/` depending to what you want to develop (React or Node).
+Once these services are fully started, depending to what you want to make you can write code either in :
+
+| Path                  | Description                          |
+| --------------------- | ------------------------------------ |
+| `./src/client/`       | for React components and CSS modules |
+| `./src/services/api/` | for API endpoints that serves JSON   |
+| `./src/services/ssr/` | for precomputed HTML responses       |
 
 Finally, go to http://localhost:8080 to check what you done.
 
@@ -51,7 +59,7 @@ You can also change the public port in `docker/compose.yml` (default to 8080):
 
 ```
 services:
-    web:
+    nginx:
         ports:
             - "8080:80"
 ```
@@ -106,7 +114,7 @@ git push origin user-list-feature
 
 On Github, select your branch `user-list-feature` and make your pull request (to `develop`).
 
-## API
+## API (from client side)
 
 Available endpoints:
 
