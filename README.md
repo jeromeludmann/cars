@@ -2,14 +2,14 @@
 
 _All is subject to change._
 
-1.  [Setting up](#setting-up)
-2.  [Get ready to develop](#get-ready-to-develop)
-3.  [Git workflow](#git-workflow)
+1.  [Get ready](#get-ready)
+2.  [Develop](#develop)
+3.  [Git](#git)
 4.  [API](#api)
-5.  [Microservice architecture](#microservice-architecture)
+5.  [Microservices](#microservices)
 6.  [TODO](#todo)
 
-## Setting up
+## Get ready
 
 First of all, make sure you already installed:
 
@@ -22,7 +22,7 @@ Then, get the entire project by cloning it from Github:
 git clone http://github.com/jeromeludmann/cars
 ```
 
-## Get ready to develop
+## Develop
 
 In order to start to develop, just run the command below from the root of the newly created folder:
 
@@ -34,17 +34,20 @@ Since some things will have to be done, like Docker images building and required
 
 That being said, `./dc` (which is a shortcut for `docker-compose --file docker/compose.yml`) will automatically run for you the services below:
 
-| Service  | Description                                                                                     |
-| :------: | ----------------------------------------------------------------------------------------------- |
-|  build   | Run Webpack. Watch and build project on changes (eslint, babel, postcss).                       |
-|   api    | Run Nodemon. Watch and restart API server if needed.                                            |
-|   web    | Run Nginx. Used as a reverse proxy and as a front server that provides direct access to assets. |
+| Service    | Description                                                                         |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `webpack`  | Watch and build project on changes (eslint, babel, postcss)                         |
+| `node-api` | Watch and restart REST API server if needed                                         |
+| `node-ssr` | Watch and restart SSR server if needed                                              |
+| `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets |
+
+_See [Microservices](#microservices) for more details about this related architecture._
 
 Once these services are fully started, you can write code either in `src/client/` or `src/server/` depending to what you want to develop (React or Node).
 
 Finally, go to http://localhost:8080 to check what you done.
 
-You can also change the Nginx port in `docker/compose.yml`:
+You can also change the public port in `docker/compose.yml` (default to 8080):
 
 ```
 services:
@@ -53,7 +56,7 @@ services:
             - "8080:80"
 ```
 
-## Git workflow
+## Git
 
 Set up your `~/.gitconfig` like this:
 
@@ -114,33 +117,43 @@ Available endpoints:
 |   POST | /api/cars      | Add a new car          |
 | DELETE | /api/cars/{id} | Remove an existing car |
 
-## Microservice architecture
+## Microservices
 
-See below the current microservice architecture.
+To go deeper with the global architecture, find below a microservice schema:
 
 ```
-                       Nginx                  Node.js
-
-                                       +------------------+
-                                       | REST API         |
-                                       |                  |
-                                       | /api/*           |
-                                       +------------------+
-                                           |          |
-                +------------------+       |          |       +----------+
-                | Reverse proxy    |-------+          +-------| Database |
-           +----|                  |                          +----------+
-           |    | /*               |-------+
-           |    +------------------+       |
-           |                               |
-Browser ---+                           +------------------+
-           |                           | Server rendering |
-           |    +------------------+   |                  |
-           |    | Static assets    |   | /*               |
-           +----|                  |   +------------------+
-                | /assets/*        |
-                +------------------+
+                                             +-------------------+
+                                             |     node-api      |
+                                             + - - - - - - - - - +
+                                             | REST API          |
+                                             | /api/*            |
+                                             |                   |
+                     +-------------------+   +-------------------+
+                     |       nginx       |       |           |       +--------+
+                     + - - - - - - - - - +       |           |       |        |
+                     | Reverse Proxy     |--->---+           +--->---|   db   |
+               +-->--| /api/*            |                           |        |
+               |     | /*                |--->---+                   +--------+
+browser --->---+     + - - - - - - - - - +       |
+               |     | Static assets     |       |
+               +-->--| /assets/*         |   +-------------------+
+                     |                   |   |     node-ssr      |
+                     +-------------------+   + - - - - - - - - - +
+                                             | Server Rendering  |
+                                             | /*                |
+                                             |                   |
+                                             +-------------------+
 ```
+
+_Note that `db` is not set up yet. Coming soon, see [TODO](#todo)._
+
+Moreover, there are 3 route types:
+
+| Route       | Description                                                  |
+| :---------- | :----------------------------------------------------------- |
+| `/*`        | HTML. Pass to proxy and get precomputed HTML from SSR server |
+| `/api/*`    | JSON. Pass to proxy and get JSON response from REST API      |
+| `/assets/*` | Static files. Directly get React, CSS, etc. from Nginx       |
 
 ## TODO
 
@@ -160,7 +173,3 @@ Browser ---+                           +------------------+
 
 * GraphQL (instead of REST API)
 * Server Sider Rendering (SSR)
-
-```
-
-```
