@@ -6,8 +6,7 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
     alias: {
-      Client: path.resolve(__dirname, '..', 'src', 'client'),
-      Server: path.resolve(__dirname, '..', 'src', 'server')
+      Cars: path.resolve(__dirname, '..', 'src')
     }
   },
   watchOptions: {

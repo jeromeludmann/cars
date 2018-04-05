@@ -1,7 +1,7 @@
 import path from 'path'
 import express from 'express'
 
-import api from 'Server/api'
+import api from 'Cars/server/api'
 
 const app = express()
 

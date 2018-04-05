@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { jsonBodyParser } from 'Server/middlewares'
+import { jsonBodyParser } from 'Cars/server/middlewares'
 
 // controllers
 

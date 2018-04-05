@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import HelloWorld from 'Client/HelloWorld'
+import HelloWorld from 'Cars/client/HelloWorld'
 
 render(
   <HelloWorld name='You' />,
