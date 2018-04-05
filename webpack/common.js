@@ -37,8 +37,19 @@ module.exports = {
             loader: 'css-loader',
             options: {
               localIdentName: '[local]__[hash:base64:5]',
-              minimize: true,
-              sourceMap: true
+              sourceMap: true,
+              minimize: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              ident: 'postcss',
+              plugins: loader => [
+                require('postcss-cssnext')(),
+                require('postcss-normalize')({ forceImport: true })
+              ]
             }
           }
         ]
