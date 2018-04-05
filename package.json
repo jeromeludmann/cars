@@ -8,8 +8,10 @@
     "api": "node -r source-map-support/register dist/services/api/bundle.js",
     "ssr": "node -r source-map-support/register dist/services/ssr/bundle.js",
     "watch:webpack": "npm run webpack -- --watch",
-    "watch:api": "nodemon -w dist/services/api/bundle.js -x 'npm run api'",
-    "watch:ssr": "nodemon -w dist/services/ssr/bundle.js -x 'npm run ssr'"
+    "watch:api":
+      "sleep 3 && nodemon -w dist/services/api/bundle.js -x 'npm run api'",
+    "watch:ssr":
+      "sleep 3 && nodemon -w dist/services/ssr/bundle.js -x 'npm run ssr'"
   },
   "keywords": [],
   "author": "",

@@ -9,7 +9,7 @@ services:
     volumes:
       - ../:/usr/src/cars/:ro
       - /usr/src/cars/node_modules/
-      - ../dist:/usr/src/cars/dist/:rw
+      - ../dist/:/usr/src/cars/dist/:rw
     environment:
       - NODE_ENV=development
 
