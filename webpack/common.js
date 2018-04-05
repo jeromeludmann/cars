@@ -46,7 +46,10 @@ module.exports = {
             options: {
               sourceMap: true,
               ident: 'postcss',
-              plugins: loader => [require('postcss-cssnext')()]
+              plugins: loader => [
+                require('postcss-cssnext')(),
+                require('postcss-normalize')({ forceImport: true })
+              ]
             }
           }
         ]
