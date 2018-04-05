@@ -2,6 +2,12 @@
 
 _All is subject to change._
 
+1.  [Setting up](#setting-up)
+2.  [Get ready to develop](#get-ready-to-develop)
+3.  [Git workflow](#git-workflow)
+4.  [API](#api)
+5.  [TODO](#todo)
+
 ## Setting up
 
 First of all, make sure you already installed:
