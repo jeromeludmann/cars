@@ -1,9 +1,0 @@
-:local .bolder {
-  font-weight: bolder;
-  color: red;
-}
-
-:local .lighter {
-  font-weight: lighter;
-  color: green;
-}
