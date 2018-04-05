@@ -4,10 +4,12 @@
   "description": "",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "webpack --config webpack/",
-    "start": "node -r source-map-support/register dist/server.js",
-    "watch:build": "npm run build -- --watch",
-    "watch:start": "nodemon -w dist/server.js -x 'npm run start'"
+    "webpack": "webpack --config webpack/",
+    "api": "node -r source-map-support/register dist/server/api/bundle.js",
+    "ssr": "node -r source-map-support/register dist/server/ssr/bundle.js",
+    "watch:webpack": "npm run webpack -- --watch",
+    "watch:api": "nodemon -w dist/server/api/bundle.js -x 'npm run api'",
+    "watch:ssr": "nodemon -w dist/server/ssr/bundle.js -x 'npm run ssr'"
   },
   "keywords": [],
   "author": "",

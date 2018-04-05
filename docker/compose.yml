@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  build:
+  webpack:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    command: npm run watch:build
+    command: npm run watch:webpack
     volumes:
       - ../:/usr/src/cars/:ro
       - /usr/src/cars/node_modules/
@@ -13,31 +13,48 @@ services:
     environment:
       - NODE_ENV=development
 
-  api:
+  node-api:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    command: npm run watch:start
+    command: npm run watch:api
     volumes:
-      - ../:/usr/src/cars/:ro
-      - /usr/src/cars/node_modules/
+      - ../dist/server/api/:/usr/src/cars/dist/server/api/:ro
     environment:
       - NODE_ENV=development
       - NODE_PORT=3006
     expose:
       - 3006
     depends_on: 
-      - build
+      - webpack
 
-  web:
+  node-ssr:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: npm run watch:ssr
+    volumes:
+      - ../dist/server/ssr/:/usr/src/cars/dist/server/ssr/:ro
+      # that's not really good but it works
+      - ../src/server/ssr/html.ejs:/usr/src/cars/src/server/ssr/html.ejs:ro
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=3007
+    expose:
+      - 3007
+    depends_on: 
+      - webpack
+
+  nginx:
     image: nginx
     volumes:
       - ../docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ../dist/assets/:/usr/share/nginx/html/:ro
+      - ../dist/client/:/usr/share/nginx/html/:ro
     environment:
       - NGINX_HOST=cars
       - NGINX_PORT=80
     ports:
       - "8080:80"
     links:
-      - api
+      - node-api
+      - node-ssr
