@@ -1,7 +1,4 @@
 import { Router } from 'express'
-import { jsonBodyParser } from 'Cars/server/middlewares'
-
-// controllers
 
 const mockedCars = {
   boumbo: { name: 'boumbo', color: 'yellow' },
@@ -60,9 +57,6 @@ export const removeCar = (req, res) => {
 }
 
 const router = Router()
-
-// middlewares
-router.use(jsonBodyParser)
 
 // routes
 router.get('/cars/:name', getCar)

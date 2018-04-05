@@ -1,12 +1,14 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
-module.exports = {
-  entry: './src/server/server.js',
-  output: {
-    path: path.resolve(__dirname, '..', 'dist'),
-    filename: 'server.js'
-  },
+module.exports = service => ({
   target: 'node',
-  externals: [nodeExternals()]
-}
+  externals: [nodeExternals()],
+  entry: {
+    bundle: [`./src/server/${service}/index.js`]
+  },
+  output: {
+    path: path.resolve(__dirname, '..', 'dist', 'server', service),
+    filename: '[name].js'
+  }
+})
