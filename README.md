@@ -48,6 +48,24 @@ services:
 
 ## Git workflow
 
+Set up your `~/.gitconfig` like this:
+
+```
+[user]
+name = Your full name
+email = your@email
+```
+
+Adding also this following make commands less tiring:
+
+```
+[alias]
+co = checkout
+ci = commit
+st = status
+br = branch
+```
+
 If you are about to develop a new feature called "User List", you have to create a new branch from `develop`.
 
 `develop` is the reference branch for all new features. Do **NOT** push directly to this branch.
@@ -71,6 +89,8 @@ You can now code within the branch `user-list-feature`.
 Once the job is done, add your changes, commit and push them:
 
 ```
+git add src/client/UserList/*
+git commit -m "Add User List feature"
 git push origin user-list-feature
 ```
 
