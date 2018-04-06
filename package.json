@@ -3,21 +3,21 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
+    "postinstall": "flow-typed install",
     "clean": "rm -rf dist",
+    "flow": "flow",
     "webpack": "webpack --config webpack/",
     "api": "node -r source-map-support/register dist/services/api/bundle.js",
     "ssr": "node -r source-map-support/register dist/services/ssr/bundle.js",
+    "watch:flow": "nodemon -w src/ -x 'npm run flow; exit 0'",
     "watch:webpack": "npm run webpack -- --watch",
-    "watch:api":
-      "sleep 3 && nodemon -w dist/services/api/bundle.js -x 'npm run api'",
-    "watch:ssr":
-      "sleep 3 && nodemon -w dist/services/ssr/bundle.js -x 'npm run ssr'"
+    "watch:api": "sleep 5 && nodemon -w dist/services/api/bundle.js -x 'npm run api'",
+    "watch:ssr": "sleep 5 && nodemon -w dist/services/ssr/bundle.js -x 'npm run ssr'"
   },
   "keywords": [],
   "author": "",
   "license": "",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.4",
@@ -28,11 +28,13 @@
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-jsx": "^5.0.0",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.69.0",
+    "flow-typed": "^2.4.0",
     "nodemon": "^1.17.2",
     "npm-run-all": "^4.1.2",
     "postcss-cssnext": "^3.1.0",
