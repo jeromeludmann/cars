@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   mode: 'development',
-  devtool: 'source-map',
+  devtool: 'cheap-eval-source-map',
   resolve: {
     extensions: ['*', '.js', '.jsx'],
     alias: {
