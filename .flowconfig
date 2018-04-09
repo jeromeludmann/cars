@@ -9,5 +9,6 @@
 [lints]
 
 [options]
+module.name_mapper='^Cars' ->'<PROJECT_ROOT>/src'
 
 [strict]
