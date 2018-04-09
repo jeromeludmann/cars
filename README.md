@@ -40,7 +40,7 @@ That being said `./dc` will automatically run for you the services below:
 
 | Service    | Description                                                                         |
 | ---------- | ----------------------------------------------------------------------------------- |
-| `webpack`  | Watch and rebuild project on changes (eslint, babel, postcss)                       |
+| `webpack`  | Watch and rebuild project on changes (eslint, flow, babel, postcss)                       |
 | `node-api` | Watch and restart REST API server if needed                                         |
 | `node-ssr` | Watch and restart SSR server if needed                                              |
 | `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets |
