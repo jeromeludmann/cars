@@ -1,4 +1,5 @@
 const path = require('path')
+const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -55,5 +56,6 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [new FlowBabelWebpackPlugin()]
 }

@@ -5,11 +5,9 @@
   "scripts": {
     "postinstall": "flow-typed install",
     "clean": "rm -rf dist",
-    "flow": "flow; exit 0",
     "webpack": "webpack --config webpack/",
     "api": "node -r source-map-support/register dist/services/api/bundle.js",
     "ssr": "node -r source-map-support/register dist/services/ssr/bundle.js",
-    "watch:flow": "nodemon -w src/ -x 'npm run flow'",
     "watch:webpack": "npm run webpack -- --watch",
     "watch:api": "sleep 5 && nodemon -w dist/services/api/bundle.js -x 'npm run api'",
     "watch:ssr": "sleep 5 && nodemon -w dist/services/ssr/bundle.js -x 'npm run ssr'"
@@ -33,6 +31,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "flow-babel-webpack-plugin": "^1.1.1",
     "flow-bin": "^0.69.0",
     "flow-typed": "^2.4.0",
     "nodemon": "^1.17.2",
