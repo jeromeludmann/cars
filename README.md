@@ -16,10 +16,12 @@ First of all, make sure you already installed:
 * Git
 * Docker
 
-Then, get the entire project by cloning it from Github:
+Then, get the entire project by cloning it from Github and install dependencies:
 
 ```
 git clone http://github.com/jeromeludmann/cars
+cd cars
+npm install
 ```
 
 ## Develop
