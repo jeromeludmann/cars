@@ -5,11 +5,11 @@
   "scripts": {
     "postinstall": "flow-typed install",
     "clean": "rm -rf dist",
-    "flow": "flow",
+    "flow": "flow; exit 0",
     "webpack": "webpack --config webpack/",
     "api": "node -r source-map-support/register dist/services/api/bundle.js",
     "ssr": "node -r source-map-support/register dist/services/ssr/bundle.js",
-    "watch:flow": "nodemon -w src/ -x 'npm run flow; exit 0'",
+    "watch:flow": "nodemon -w src/ -x 'npm run flow'",
     "watch:webpack": "npm run webpack -- --watch",
     "watch:api": "sleep 5 && nodemon -w dist/services/api/bundle.js -x 'npm run api'",
     "watch:ssr": "sleep 5 && nodemon -w dist/services/ssr/bundle.js -x 'npm run ssr'"
