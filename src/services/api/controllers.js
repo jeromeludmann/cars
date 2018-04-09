@@ -1,3 +1,5 @@
+// @flow
+import type { $Request, $Response, Middleware } from 'express'
 import { Router } from 'express'
 
 const mockedCars = {
@@ -5,7 +7,7 @@ const mockedCars = {
   vroum: { name: 'vroum', color: 'red' }
 }
 
-export const getCar = (req, res) => {
+export const getCar = (req: $Request, res: $Response) => {
   const { name } = req.params
   const foundCar = mockedCars[name]
 
@@ -19,12 +21,12 @@ export const getCar = (req, res) => {
   }
 }
 
-export const getCars = (req, res) => {
+export const getCars = (req: $Request, res: $Response) => {
   res.status(200).json({ success: true, data: { cars: mockedCars } })
 }
 
-export const addCar = (req, res) => {
-  const { name, color } = req.body
+export const addCar = (req: $Request, res: $Response) => {
+  const { name, color } = (req.body: any)
 
   if (mockedCars[name]) {
     res.status(400).json({
@@ -42,7 +44,7 @@ export const addCar = (req, res) => {
   }
 }
 
-export const removeCar = (req, res) => {
+export const removeCar = (req: $Request, res: $Response) => {
   const { name } = req.params
 
   if (!mockedCars[name]) {
@@ -65,7 +67,7 @@ router.post('/cars', addCar)
 router.delete('/cars/:name', removeCar)
 
 // 404 catcher
-router.use('*', (req, res, nex) => {
+router.use('*', (req: $Request, res: $Response, next: Middleware) => {
   res.status(404).json({ message: 'Route not found' })
 })
 

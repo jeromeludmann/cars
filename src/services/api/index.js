@@ -1,3 +1,5 @@
+// @flow
+import type { $Request, $Response } from 'express'
 import express from 'express'
 
 import { jsonBodyParser } from 'Cars/services/api/middlewares'
@@ -13,11 +15,11 @@ app.use('/', jsonBodyParser)
 app.use('/', controllers)
 
 // handle 404
-app.get('*', (req, res) => {
+app.get('*', (req: $Request, res: $Response, next) => {
   res.status(404).json({ success: true, message: 'Not found' })
 })
 
-const port = process.env.NODE_PORT || config.port
+const port = Number(process.env.NODE_PORT) || config.port
 app.listen(port, () => {
   console.log(`API service is listening on port ${port}`)
 })
