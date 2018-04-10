@@ -1,6 +1,6 @@
 import path from 'path'
 import express from 'express'
-import config from 'Cars/services/ssr/config'
+import config from 'Cars/back/ssr/config'
 
 const app = express()
 
@@ -20,5 +20,5 @@ app.get('*', (req, res) => {
 
 const port = process.env.NODE_PORT || config.port
 app.listen(port, () => {
-  console.log(`SSR service is listening on port ${port}`)
+  process.stdout.write(`SSR service is listening on port ${port}`)
 })

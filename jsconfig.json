@@ -3,9 +3,9 @@
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "baseUrl": "./",
+    "baseUrl": "src",
     "paths": {
-      "Cars/*": ["src/*"]
+      "Cars/*": ["*"]
     }
   },
   "exclude": ["node_modules", "dist"]

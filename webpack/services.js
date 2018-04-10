@@ -4,11 +4,9 @@ const nodeExternals = require('webpack-node-externals')
 module.exports = serviceName => ({
   target: 'node',
   externals: [nodeExternals()],
-  entry: {
-    bundle: [`./src/services/${serviceName}/index.js`]
-  },
+  entry: `./src/back/${serviceName}/index.ts`,
   output: {
-    path: path.resolve(__dirname, '..', 'dist', 'services', serviceName),
-    filename: '[name].js'
+    path: path.resolve(__dirname, '..', 'dist', 'services'),
+    filename: `${serviceName}.bundle.js`
   }
 })

@@ -1,10 +1,10 @@
 import express from 'express'
 
-import { jsonBodyParser } from 'Cars/services/api/middlewares'
-import controllers from 'Cars/services/api/controllers'
-import config from 'Cars/services/api/config'
+import { jsonBodyParser } from 'Cars/back/api/middlewares'
+import config from 'Cars/back/api/config'
+import controllers from 'Cars/back/api/controllers'
 
-const app = express()
+const app: express.Application = express()
 
 // middlewares
 app.use('/', jsonBodyParser)
@@ -19,5 +19,5 @@ app.get('*', (req, res) => {
 
 const port = process.env.NODE_PORT || config.port
 app.listen(port, () => {
-  console.log(`API service is listening on port ${port}`)
+  process.stdout.write(`API service is listening on port ${port}`)
 })
