@@ -1,4 +1,4 @@
-import { Config } from 'Cars/back/Config'
+import { Config } from '@cars/back/Config'
 
 const config: Config = {
   port: 3307

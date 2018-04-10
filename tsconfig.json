@@ -9,7 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
     "paths": {
-      "Cars/*": ["*"]
+      "@cars/*": ["*"]
     }
   },
   "include": ["src"]

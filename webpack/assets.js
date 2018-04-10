@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    bundle: ['./src/front/index.jsx']
+    bundle: ['./src/front/index.tsx']
   },
   output: {
     path: path.resolve(__dirname, '..', 'dist', 'assets'),

@@ -7,9 +7,9 @@ const common = {
   mode: 'development',
   devtool: 'cheap-eval-source-map',
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
     alias: {
-      Cars: path.resolve(__dirname, '..', 'src')
+      '@cars': path.resolve(__dirname, '..', 'src')
     }
   },
   watchOptions: {

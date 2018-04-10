@@ -5,7 +5,7 @@
     "jsx": "react",
     "baseUrl": "src",
     "paths": {
-      "Cars/*": ["*"]
+      "@cars/*": ["*"]
     }
   },
   "exclude": ["node_modules", "dist"]
