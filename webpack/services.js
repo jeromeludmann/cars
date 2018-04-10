@@ -5,7 +5,7 @@ module.exports = serviceName => ({
   target: 'node',
   externals: [nodeExternals()],
   entry: {
-    bundle: [`./src/services/${serviceName}/index.js`]
+    bundle: [`./src/services/${serviceName}/index.ts`]
   },
   output: {
     path: path.resolve(__dirname, '..', 'dist', 'services', serviceName),
