@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "noImplicitAny": true,
+    "strictNullChecks": true,
     "module": "commonjs",
     "target": "esnext",
     "jsx": "react",
