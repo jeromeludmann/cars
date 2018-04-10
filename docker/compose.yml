@@ -36,7 +36,7 @@ services:
     volumes:
       - ../dist/services/ssr.bundle.js:/usr/src/cars/dist/services/ssr.bundle.js:ro
       # it works but I don't like this way
-      - ../src/services/ssr/html.ejs:/usr/src/cars/src/services/ssr/html.ejs:ro
+      - ../src/back/ssr/html.ejs:/usr/src/cars/src/back/ssr/html.ejs:ro
     environment:
       - NODE_ENV=development
       - NODE_PORT=3007
