@@ -40,12 +40,12 @@ Since some things will have to be done, like Docker images building and required
 
 That being said `./dc` will automatically run for you the services below:
 
-| Service    | Description                                                                                     |
-| ---------- | ----------------------------------------------------------------------------------------------- |
-| `webpack`  | Watch and rebuild project on changes (linting, type checking, transpiling, CSS post processing) |
-| `node-api` | Watch and restart REST API server if needed                                                     |
-| `node-ssr` | Watch and restart SSR server if needed                                                          |
-| `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets             |
+| Service  | Description                                                                                                  |
+| -------- | ------------------------------------------------------------------------------------------------------------ |
+| `dev`    | Watch and rebuild project with Webpack on changes (linting, type checking, transpiling, CSS post processing) |
+| `api`    | Watch and restart REST API Node.js server if needed                                                          |
+| `ssr`    | Watch and restart SSR Node.js server if needed                                                               |
+| `web`    | Use Nginx as a reverse proxy and as a front server that provides direct access to assets                     |
 
 _See [Microservices](#microservices) for more details about this related architecture._
 
@@ -63,9 +63,9 @@ You can also change the public port in `docker/compose.yml` (default to 8080):
 
 ```
 services:
-    nginx:
-        ports:
-            - "8080:80"
+  web:
+    ports:
+      - "8080:80"
 ```
 
 ## Git
@@ -141,13 +141,13 @@ To go deeper with the global architecture, find below a microservice schema:
 
 ```
                                              +-------------------+
-                                             |     node-api      |
+                                             |        api        |
                                              + - - - - - - - - - +
                                              | REST API          |
                                              | /api/*            |
                                              |                   |
                      +-------------------+   +-------------------+
-                     |       nginx       |       |           |       +--------+
+                     |        web        |       |           |       +--------+
                      + - - - - - - - - - +       |           |       |        |
                      | Reverse Proxy     |--->---+           +--->---|   db   |
                +-->--| /api/*            |                           |        |
@@ -155,7 +155,7 @@ To go deeper with the global architecture, find below a microservice schema:
 browser --->---+     + - - - - - - - - - +       |
                |     | Static assets     |       |
                +-->--| /assets/*         |   +-------------------+
-                     |                   |   |     node-ssr      |
+                     |                   |   |        ssr        |
                      +-------------------+   + - - - - - - - - - +
                                              | Server Rendering  |
                                              | /*                |
