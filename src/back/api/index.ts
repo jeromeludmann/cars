@@ -1,8 +1,8 @@
 import express from 'express'
 
-import { jsonBodyParser } from 'Cars/services/api/middlewares'
-import config from 'Cars/services/api/config'
-import controllers from 'Cars/services/api/controllers'
+import { jsonBodyParser } from 'Cars/back/api/middlewares'
+import config from 'Cars/back/api/config'
+import controllers from 'Cars/back/api/controllers'
 
 const app: express.Application = express()
 

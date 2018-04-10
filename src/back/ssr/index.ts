@@ -1,6 +1,6 @@
 import path from 'path'
 import express from 'express'
-import config from 'Cars/services/ssr/config'
+import config from 'Cars/back/ssr/config'
 
 const app = express()
 

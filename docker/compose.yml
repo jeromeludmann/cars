@@ -19,7 +19,7 @@ services:
       dockerfile: docker/Dockerfile
     command: npm run watch:api
     volumes:
-      - ../dist/services/api/:/usr/src/cars/dist/services/api/:ro
+      - ../dist/services/api.bundle.js:/usr/src/cars/dist/services/api.bundle.js:ro
     environment:
       - NODE_ENV=development
       - NODE_PORT=3006
@@ -34,8 +34,8 @@ services:
       dockerfile: docker/Dockerfile
     command: npm run watch:ssr
     volumes:
-      - ../dist/services/ssr/:/usr/src/cars/dist/services/ssr/:ro
-      # I'm not sure that's the better way but it just works
+      - ../dist/services/ssr.bundle.js:/usr/src/cars/dist/services/ssr.bundle.js:ro
+      # it works but I don't like this way
       - ../src/services/ssr/html.ejs:/usr/src/cars/src/services/ssr/html.ejs:ro
     environment:
       - NODE_ENV=development
@@ -49,7 +49,7 @@ services:
     image: nginx
     volumes:
       - ../docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ../dist/client/:/usr/share/nginx/html/:ro
+      - ../dist/assets/:/usr/share/nginx/html/:ro
     environment:
       - NGINX_HOST=cars
       - NGINX_PORT=80
