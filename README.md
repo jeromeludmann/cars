@@ -51,11 +51,11 @@ _See [Microservices](#microservices) for more details about this related archite
 
 Once these services are fully started, depending to what you want to make you can write code either in :
 
-| Path                  | Description                          |
-| --------------------- | ------------------------------------ |
-| `./src/client/`       | for React components and CSS modules |
-| `./src/services/api/` | for API endpoints that serves JSON   |
-| `./src/services/ssr/` | for precomputed HTML responses       |
+| Path              | Description                          |
+| ----------------- | ------------------------------------ |
+| `./src/front/`    | for React components and CSS modules |
+| `./src/back/api/` | for API endpoints that serves JSON   |
+| `./src/back/ssr/` | for precomputed HTML responses       |
 
 Finally, go to http://localhost:8080 to check what you done.
 
