@@ -1,11 +1,15 @@
-import { Router } from 'express'
+import { Request, Response, Router } from 'express'
 
-const mockedCars = {
+interface MockedCars {
+  [carName: string]: { [attr: string]: string }
+}
+
+const mockedCars: MockedCars = {
   boumbo: { name: 'boumbo', color: 'yellow' },
   vroum: { name: 'vroum', color: 'red' }
 }
 
-export const getCar = (req, res) => {
+export const getCar = (req: Request, res: Response) => {
   const { name } = req.params
   const foundCar = mockedCars[name]
 
@@ -19,11 +23,11 @@ export const getCar = (req, res) => {
   }
 }
 
-export const getCars = (req, res) => {
+export const getCars = (req: Request, res: Response) => {
   res.status(200).json({ success: true, data: { cars: mockedCars } })
 }
 
-export const addCar = (req, res) => {
+export const addCar = (req: Request, res: Response) => {
   const { name, color } = req.body
 
   if (mockedCars[name]) {
@@ -42,7 +46,7 @@ export const addCar = (req, res) => {
   }
 }
 
-export const removeCar = (req, res) => {
+export const removeCar = (req: Request, res: Response) => {
   const { name } = req.params
 
   if (!mockedCars[name]) {
