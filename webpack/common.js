@@ -4,7 +4,7 @@ module.exports = {
   mode: 'development',
   devtool: 'cheap-eval-source-map',
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       Cars: path.resolve(__dirname, '..', 'src')
     }
@@ -16,27 +16,37 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader'
-      },
-      {
-        enforce: 'pre',
-        test: /\.tsx?$/,
-        loader: 'tslint-loader'
-      },
+      // JavaScript
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: [
+          'babel-loader',
+          {
+            loader: 'eslint-loader',
+            options: {
+              failOnWarning: false,
+              failOnError: true
+            }
+          }
+        ]
       },
+
+      // TypeScript
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'ts-loader']
+        use: [
+          'babel-loader',
+          'ts-loader',
+          {
+            loader: 'tslint-loader',
+            options: { failOnHint: true }
+          }
+        ]
       },
+
+      // CSS
       {
         test: /\.css$/,
         use: [
