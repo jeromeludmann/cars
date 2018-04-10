@@ -11,15 +11,17 @@ _All is subject to change._
 
 ## Get ready
 
-First of all, make sure you already installed:
+First of all, make sure you already installed both `git` and `docker`.
 
-* Git
-* Docker
-
-Then, get the entire project by cloning it from Github and install dependencies:
+Then, get the entire project by cloning it from Github:
 
 ```
 git clone http://github.com/jeromeludmann/cars
+```
+
+It may be necessary to install dependencies locally:
+
+```
 cd cars
 npm install
 ```
@@ -38,12 +40,12 @@ Since some things will have to be done, like Docker images building and required
 
 That being said `./dc` will automatically run for you the services below:
 
-| Service    | Description                                                                         |
-| ---------- | ----------------------------------------------------------------------------------- |
-| `webpack`  | Watch and rebuild project on changes (eslint, babel, postcss)                       |
-| `node-api` | Watch and restart REST API server if needed                                         |
-| `node-ssr` | Watch and restart SSR server if needed                                              |
-| `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets |
+| Service    | Description                                                                                     |
+| ---------- | ----------------------------------------------------------------------------------------------- |
+| `webpack`  | Watch and rebuild project on changes (linting, type checking, transpiling, CSS post processing) |
+| `node-api` | Watch and restart REST API server if needed                                                     |
+| `node-ssr` | Watch and restart SSR server if needed                                                          |
+| `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets             |
 
 _See [Microservices](#microservices) for more details about this related architecture._
 
@@ -114,7 +116,13 @@ git commit -m "Add User List feature"
 git push origin user-list-feature
 ```
 
-On Github, select your branch `user-list-feature` and make your pull request (to `develop`).
+On Github, select your branch `user-list-feature` and make your Pull Request (PR) to `develop`.
+
+Before doing that, it's recommended that your branch be already up to date with `develop`:
+
+```
+git pull --rebase origin develop
+```
 
 ## API (from client side)
 
