@@ -17,7 +17,7 @@ app.get('*', (req, res) => {
   res.status(404).json({ success: true, message: 'Not found' })
 })
 
-const port = process.env.NODE_PORT || config.port
+const port = Number(process.env.NODE_PORT) || config.port
 app.listen(port, () => {
   process.stdout.write(`API service is listening on port ${port}`)
 })
