@@ -9,7 +9,10 @@ const common = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
     alias: {
-      '@cars': path.resolve(__dirname, '..', 'src')
+      '@front': path.resolve(__dirname, '..', 'src', 'front'),
+      '@back': path.resolve(__dirname, '..', 'src', 'back'),
+      '@api': path.resolve(__dirname, '..', 'src', 'back', 'api'),
+      '@ssr': path.resolve(__dirname, '..', 'src', 'back', 'ssr')
     }
   },
   watchOptions: {

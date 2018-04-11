@@ -1,16 +1,16 @@
 import express from 'express'
 
-import { jsonBodyParser } from '@cars/back/api/middlewares'
-import config from '@cars/back/api/config'
-import controllers from '@cars/back/api/controllers'
+import { jsonBodyParser } from '@api/middlewares'
+import config from '@api/config'
+import controllers from '@api/controllers'
 
 const app: express.Application = express()
 
 // middlewares
-app.use('/', jsonBodyParser)
+app.use(jsonBodyParser)
 
 // routes
-app.use('/', controllers)
+app.use(controllers)
 
 // handle 404
 app.get('*', (req, res) => {

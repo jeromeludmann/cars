@@ -12,7 +12,10 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
     "paths": {
-      "@cars/*": ["*"]
+      "@front/*": ["front/*"],
+      "@back/*": ["back/*"],
+      "@api/*": ["back/api/*"],
+      "@ssr/*": ["back/ssr/*"]
     }
   },
   "include": ["src"]
