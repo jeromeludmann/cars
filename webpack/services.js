@@ -8,5 +8,6 @@ module.exports = serviceName => ({
   output: {
     path: path.resolve(__dirname, '..', 'dist', 'services'),
     filename: `${serviceName}.bundle.js`
-  }
+  },
+  devtool: 'source-map'
 })

@@ -5,12 +5,10 @@ const services = require('./services')
 
 const common = {
   mode: 'development',
-  devtool: 'cheap-eval-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
     alias: {
       '@front': path.resolve(__dirname, '..', 'src', 'front'),
-      '@back': path.resolve(__dirname, '..', 'src', 'back'),
       '@api': path.resolve(__dirname, '..', 'src', 'back', 'api'),
       '@ssr': path.resolve(__dirname, '..', 'src', 'back', 'ssr')
     }
