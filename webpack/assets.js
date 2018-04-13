@@ -7,5 +7,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..', 'dist', 'assets'),
     filename: '[name].js'
-  }
+  },
+  devtool: 'cheap-eval-source-map'
 }

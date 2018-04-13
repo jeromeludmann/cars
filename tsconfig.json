@@ -13,7 +13,6 @@
     "baseUrl": "src",
     "paths": {
       "@front/*": ["front/*"],
-      "@back/*": ["back/*"],
       "@api/*": ["back/api/*"],
       "@ssr/*": ["back/ssr/*"]
     }
