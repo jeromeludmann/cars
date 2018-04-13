@@ -2,3 +2,4 @@ node_modules
 dist
 .vscode
 TODO.md
+docker/db

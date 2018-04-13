@@ -1,0 +1,10 @@
+#!/bin/sh
+
+./dc exec mongo mongoimport \
+    --host mongo \
+    --db cars \
+    --collection cars \
+    --type json \
+    --drop \
+    --file /tmp/db-sample.json \
+    --jsonArray

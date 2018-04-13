@@ -20,5 +20,5 @@ app.get('*', (req, res) => {
 
 const port = process.env.NODE_PORT || config.port
 app.listen(port, () => {
-  process.stdout.write(`SSR service is listening on port ${port}`)
+  console.log(`Listening on port ${port}`)
 })

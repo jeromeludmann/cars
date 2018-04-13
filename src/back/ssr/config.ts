@@ -1,4 +1,6 @@
-import { Config } from '@cars/back/Config'
+export interface Config {
+  port: number
+}
 
 const config: Config = {
   port: 3307

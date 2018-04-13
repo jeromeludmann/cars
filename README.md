@@ -24,6 +24,7 @@ It may be necessary to install dependencies locally:
 ```
 cd cars
 npm install
+npm run webpack
 ```
 
 ## Develop
@@ -40,12 +41,13 @@ Since some things will have to be done, like Docker images building and required
 
 That being said `./dc` will automatically run for you the services below:
 
-| Service  | Description                                                                                                  |
-| -------- | ------------------------------------------------------------------------------------------------------------ |
-| `dev`    | Watch and rebuild project with Webpack on changes (linting, type checking, transpiling, CSS post processing) |
-| `api`    | Watch and restart REST API Node.js server if needed                                                          |
-| `ssr`    | Watch and restart SSR Node.js server if needed                                                               |
-| `web`    | Use Nginx as a reverse proxy and as a front server that provides direct access to assets                     |
+| Service    | Description                                                                                     |
+| ---------- | ----------------------------------------------------------------------------------------------- |
+| `webpack`  | Watch and rebuild project on changes (linting, type checking, transpiling, CSS post processing) |
+| `node-api` | Watch and restart REST API server if needed                                                     |
+| `node-ssr` | Watch and restart SSR server if needed                                                          |
+| `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets             |
+| `mongo`    | Start MongoDB                                                                                   |
 
 _See [Microservices](#microservices) for more details about this related architecture._
 
@@ -68,6 +70,14 @@ services:
       - "8080:80"
 ```
 
+You can import samples into database by typing `./reset-db` (note that this will erase all the existing data).
+
+Having trouble with Docker?
+
+In doubt, you could try `./dc-prune` to remove containers, networks and volumes.
+
+Then run again `./dc up`.
+
 ## Git
 
 Set up your `~/.gitconfig` like this:
@@ -88,7 +98,7 @@ st = status
 br = branch
 ```
 
-If you are about to develop a new feature called "User List", you have to create a new branch from `develop`.
+If you are about to develop a new feature called _User List_, you have to create a new branch from `develop`.
 
 `develop` is the reference branch for all new features. Do **NOT** push directly to this branch.
 
@@ -126,14 +136,15 @@ git pull --rebase origin develop
 
 ## API (from client side)
 
-Available endpoints:
+Foremost you can test API by requesting `GET /api/hello/world`.
 
-| Method | URL            | Description            |
-| -----: | :------------- | :--------------------- |
-|    GET | /api/cars      | Get all cars           |
-|    GET | /api/cars/{id} | Get a specified car    |
-|   POST | /api/cars      | Add a new car          |
-| DELETE | /api/cars/{id} | Remove an existing car |
+List of available endpoints:
+
+| Method | URL               | Description   |
+| -----: | ----------------- | ------------- |
+|   POST |  /api/cars        |  Add a car    |
+|    GET |  /api/cars/:name  |  Get all cars |
+| DELETE | /api/cars/:name   | Remove a car  |
 
 ## Microservices
 
@@ -141,29 +152,27 @@ To go deeper with the global architecture, find below a microservice schema:
 
 ```
                                              +-------------------+
-                                             |        api        |
+                                             |      node-api     |
                                              + - - - - - - - - - +
                                              | REST API          |
                                              | /api/*            |
                                              |                   |
                      +-------------------+   +-------------------+
-                     |        web        |       |           |       +--------+
-                     + - - - - - - - - - +       |           |       |        |
-                     | Reverse Proxy     |--->---+           +--->---|   db   |
-               +-->--| /api/*            |                           |        |
-               |     | /*                |--->---+                   +--------+
+                     |       nginx       |       |           |       +-------+
+                     + - - - - - - - - - +       |           |       |       |
+                     | Reverse Proxy     |--->---+           +--->---| mongo |
+               +-->--| /api/*            |                           |       |
+               |     | /*                |--->---+                   +-------+
 browser --->---+     + - - - - - - - - - +       |
                |     | Static assets     |       |
                +-->--| /assets/*         |   +-------------------+
-                     |                   |   |        ssr        |
+                     |                   |   |      node-ssr     |
                      +-------------------+   + - - - - - - - - - +
                                              | Server Rendering  |
                                              | /*                |
                                              |                   |
                                              +-------------------+
 ```
-
-_Note that `db` is not set up yet. Coming soon, see [TODO](#todo)._
 
 Moreover, there are 3 route types:
 
@@ -178,7 +187,8 @@ Moreover, there are 3 route types:
 ### Required
 
 * Write React components
-* Containerize a database (postgresql or mongodb)
+* ~~Add type support (with Flow or TypeScript)~~
+* ~~Containerize a database (postgresql or mongodb)~~
 * Implement the REST API
 * Implement a React/Redux architecture
   * Use components/containers (smart/dumb) React pattern

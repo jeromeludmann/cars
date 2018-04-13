@@ -1,23 +1,27 @@
 import express from 'express'
-
+import { dbClient } from '@api/db'
 import { jsonBodyParser } from '@api/middlewares'
 import config from '@api/config'
-import controllers from '@api/controllers'
+import routes from '@api/routes'
 
 const app: express.Application = express()
 
-// middlewares
+// add middlewares
 app.use(jsonBodyParser)
 
-// routes
-app.use(controllers)
+// add routes
+app.use(routes)
 
-// handle 404
-app.get('*', (req, res) => {
-  res.status(404).json({ success: true, message: 'Not found' })
+// add 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `API endpoint not found: ${req.originalUrl}`
+  })
 })
 
 const port = Number(process.env.NODE_PORT) || config.port
-app.listen(port, () => {
-  process.stdout.write(`API service is listening on port ${port}`)
-})
+
+dbClient.then(() =>
+  app.listen(port, () => console.log(`Listening on port ${port}`))
+)
