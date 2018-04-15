@@ -13,8 +13,10 @@
     "baseUrl": "src",
     "paths": {
       "@front/*": ["front/*"],
-      "@api/*": ["back/api/*"],
-      "@ssr/*": ["back/ssr/*"]
+      "@rest/*": ["back/rest/*"],
+      "@graphql/*": ["back/graphql/*"],
+      "@ssr/*": ["back/ssr/*"],
+      "@common/*": ["back/common/*"]
     }
   },
   "include": ["src"]

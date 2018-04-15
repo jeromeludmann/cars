@@ -5,9 +5,7 @@ import {
   Response,
   NextFunction
 } from 'express'
-import { PathParams } from 'express-serve-static-core'
-import { endpoints } from '@api/endpoints'
-import { getCars } from '@api/controllers'
+import { endpoints } from '@rest/endpoints'
 
 const asyncRouter = Router()
 

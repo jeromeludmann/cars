@@ -1,4 +1,5 @@
 const path = require('path')
+const { js, ts, css } = require('./rules')
 
 module.exports = {
   entry: {
@@ -8,5 +9,15 @@ module.exports = {
     path: path.resolve(__dirname, '..', 'dist', 'assets'),
     filename: '[name].js'
   },
-  devtool: 'cheap-eval-source-map'
+  mode: 'development',
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
+    alias: {
+      '@front': path.resolve(__dirname, '..', 'src', 'front')
+    }
+  },
+  module: {
+    rules: [js, ts, css]
+  },
+  devtool: 'source-map'
 }

@@ -2,21 +2,22 @@
 
 _All is subject to change._
 
-1.  [Get ready](#get-ready)
-2.  [Develop](#develop)
-3.  [Git](#git)
-4.  [API (from client side)](#api-from-client-side)
-5.  [Microservices](#microservices)
-6.  [TODO](#todo)
+1.  [Installation](#installation)
+2.  [Development](#development)
+3.  [Git Best Practices](#git-best-practices)
+4.  [Services Architecture](#services-architecture)
+5.  [REST API](#rest-api)
+6.  [GraphQL API](#graphql-api)
+7.  [TODO](#todo)
 
-## Get ready
+## Installation
 
 First of all, make sure you already installed both `git` and `docker`.
 
 Then, get the entire project by cloning it from Github:
 
 ```
-git clone http://github.com/jeromeludmann/cars
+git clone http://github.com/<username>/cars
 ```
 
 It may be necessary to install dependencies locally:
@@ -27,7 +28,7 @@ npm install
 npm run webpack
 ```
 
-## Develop
+## Development
 
 In order to start to develop, just run the command below from the root of the newly created folder:
 
@@ -41,23 +42,25 @@ Since some things will have to be done, like Docker images building and required
 
 That being said `./dc` will automatically run for you the services below:
 
-| Service    | Description                                                                                     |
-| ---------- | ----------------------------------------------------------------------------------------------- |
-| `webpack`  | Watch and rebuild project on changes (linting, type checking, transpiling, CSS post processing) |
-| `node-api` | Watch and restart REST API server if needed                                                     |
-| `node-ssr` | Watch and restart SSR server if needed                                                          |
-| `nginx`    | Used as a reverse proxy and as a front server that provides direct access to assets             |
-| `mongo`    | Start MongoDB                                                                                   |
+| Service   | Description                                                                                     |
+| --------- | ----------------------------------------------------------------------------------------------- |
+| `webpack` | Watch and rebuild project on changes (linting, type checking, transpiling, CSS post processing) |
+| `rest`    | Watch and restart REST API if needed                                                            |
+| `graphql` | Watch and restart GraphQL API if needed                                                         |
+| `ssr`     | Watch and restart SSR server if needed                                                          |
+| `nginx`   | Used as a reverse proxy and as a front server that provides direct access to assets             |
+| `mongo`   | Start MongoDB                                                                                   |
 
-_See [Microservices](#microservices) for more details about this related architecture._
+_See [more details about services architecture](#services-architecture)._
 
 Once these services are fully started, depending to what you want to make you can write code either in :
 
-| Path              | Description                          |
-| ----------------- | ------------------------------------ |
-| `./src/front/`    | for React components and CSS modules |
-| `./src/back/api/` | for API endpoints that serves JSON   |
-| `./src/back/ssr/` | for precomputed HTML responses       |
+| Path                  | Description      |
+| --------------------- | ---------------- |
+| `./src/front/`        | for React or CSS |
+| `./src/back/rest/`    | for REST API     |
+| `./src/back/graphql/` | for GraphQL API  |
+| `./src/back/ssr/`     | for pre-rendered |
 
 Finally, go to http://localhost:8080 to check what you done.
 
@@ -65,7 +68,7 @@ You can also change the public port in `docker/compose.yml` (default to 8080):
 
 ```
 services:
-  web:
+  nginx:
     ports:
       - "8080:80"
 ```
@@ -78,7 +81,7 @@ In doubt, you could try `./dc-prune` to remove containers, networks and volumes.
 
 Then run again `./dc up`.
 
-## Git
+## Git Best Practices
 
 Set up your `~/.gitconfig` like this:
 
@@ -134,9 +137,44 @@ Before doing that, it's recommended that your branch be already up to date with 
 git pull --rebase origin develop
 ```
 
-## API (from client side)
+## Services Architecture
 
-Foremost you can test API by requesting `GET /api/hello/world`.
+To go deeper with the services architecture, find below a service routing schema:
+
+```
+                                                rest
+                                         +-----------------+
+                                     +---|  /api/rest/*    |---+
+                                     |   +-----------------+   |
+                                     |                         |
+                                     |                         +--- db
+                                     |         graphql         |
+                                     |   +-----------------+   |
+                                     +---|  /api/graphql   |---+
+                                     |   +-----------------+
+                      nginx          |
+               +-----------------+   |
+           +---|  /api/*         |---+
+           |   |- - - - - - - - -|
+browser ---+---|  /*             |---+
+           |   |- - - - - - - - -|   |
+           +---|  /assets/*      |   |
+               +-----------------+   |           ssr
+                                     |   +-----------------+
+                                     +---|  /*             |
+                                         +-----------------+
+```
+
+Moreover, there are 3 route types:
+
+| Route          | Description                                                                |
+| :------------- | :------------------------------------------------------------------------- |
+| `/*`           | HTML. Pass to proxy and get precomputed HTML from SSR server               |
+| `/api/rest/*`  | JSON. Pass to proxy and get JSON response from [REST API](#rest-api)       |
+| `/api/graphql` | JSON. Pass to proxy and get JSON response from [GraphQL API](#graphql-api) |
+| `/assets/*`    | Static files. Directly get React, CSS, etc. from Nginx                     |
+
+## REST API
 
 List of available endpoints:
 
@@ -146,41 +184,9 @@ List of available endpoints:
 |    GET |  /api/cars/:name  |  Get all cars |
 | DELETE | /api/cars/:name   | Remove a car  |
 
-## Microservices
+## GraphQL API
 
-To go deeper with the global architecture, find below a microservice schema:
-
-```
-                                             +-------------------+
-                                             |      node-api     |
-                                             + - - - - - - - - - +
-                                             | REST API          |
-                                             | /api/*            |
-                                             |                   |
-                     +-------------------+   +-------------------+
-                     |       nginx       |       |           |       +-------+
-                     + - - - - - - - - - +       |           |       |       |
-                     | Reverse Proxy     |--->---+           +--->---| mongo |
-               +-->--| /api/*            |                           |       |
-               |     | /*                |--->---+                   +-------+
-browser --->---+     + - - - - - - - - - +       |
-               |     | Static assets     |       |
-               +-->--| /assets/*         |   +-------------------+
-                     |                   |   |      node-ssr     |
-                     +-------------------+   + - - - - - - - - - +
-                                             | Server Rendering  |
-                                             | /*                |
-                                             |                   |
-                                             +-------------------+
-```
-
-Moreover, there are 3 route types:
-
-| Route       | Description                                                  |
-| :---------- | :----------------------------------------------------------- |
-| `/*`        | HTML. Pass to proxy and get precomputed HTML from SSR server |
-| `/api/*`    | JSON. Pass to proxy and get JSON response from REST API      |
-| `/assets/*` | Static files. Directly get React, CSS, etc. from Nginx       |
+_In progress._
 
 ## TODO
 
@@ -189,7 +195,7 @@ Moreover, there are 3 route types:
 * Write React components
 * ~~Add type support (with Flow or TypeScript)~~
 * ~~Containerize a database (postgresql or mongodb)~~
-* Implement the REST API
+* ~~Set up REST API~~
 * Implement a React/Redux architecture
   * Use components/containers (smart/dumb) React pattern
 * Write some tests about:
@@ -199,5 +205,5 @@ Moreover, there are 3 route types:
 
 ### Optional
 
-* GraphQL (instead of REST API)
+* ~~Set up GraphQL~~
 * Server Sider Rendering (SSR)

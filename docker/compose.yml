@@ -15,44 +15,55 @@ services:
     environment:
       - NODE_ENV=development
 
-  node-api:
-    container_name: node-api
-    hostname: node-api
+  rest:
+    container_name: rest
+    hostname: rest
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    command: npm run watch:api
+    command: npm run watch:rest
     volumes:
-      - ../dist/services/api.bundle.js:/usr/src/cars/dist/services/api.bundle.js:ro
+      - ../dist/services/rest.bundle.js:/usr/src/cars/dist/services/rest.bundle.js:ro
     environment:
       - NODE_ENV=development
       - NODE_PORT=3006
     expose:
       - 3006
-    depends_on: 
-      - webpack
-      - mongo
     links:
       - mongo
 
-  node-ssr:
-    container_name: node-ssr
-    hostname: node-ssr
+  graphql:
+    container_name: graphql
+    hostname: graphql
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: npm run watch:graphql
+    volumes:
+      - ../dist/services/graphql.bundle.js:/usr/src/cars/dist/services/graphql.bundle.js:ro
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=3007
+    expose:
+      - 3007
+    links:
+      - mongo
+
+  ssr:
+    container_name: ssr
+    hostname: ssr
     build:
       context: ..
       dockerfile: docker/Dockerfile
     command: npm run watch:ssr
     volumes:
       - ../dist/services/ssr.bundle.js:/usr/src/cars/dist/services/ssr.bundle.js:ro
-      # it works but I don't like this way
       - ../src/back/ssr/html.ejs:/usr/src/cars/src/back/ssr/html.ejs:ro
     environment:
       - NODE_ENV=development
-      - NODE_PORT=3007
+      - NODE_PORT=4008
     expose:
-      - 3007
-    depends_on: 
-      - webpack
+      - 4008
 
   nginx:
     container_name: nginx
@@ -67,8 +78,9 @@ services:
     ports:
       - "8080:80"
     links:
-      - node-api
-      - node-ssr
+      - rest
+      - graphql
+      - ssr
 
   mongo:
     container_name: mongo

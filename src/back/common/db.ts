@@ -1,5 +1,5 @@
 import { MongoClient, Collection } from 'mongodb'
-import config from '@api/config'
+import config from '@common/config'
 
 const { host: dbHost, port: dbPort, name: dbName } = config.db
 const dbUrl = `mongodb://${dbHost}:${dbPort}/${dbName}`

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { carsCollection } from '@api/db'
+import { carsCollection } from '@common/db'
 
 export const addCar = async (req: Request, res: Response) => {
   const car = req.body

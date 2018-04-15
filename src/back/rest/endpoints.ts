@@ -1,6 +1,6 @@
 import { PathParams } from 'express-serve-static-core'
 import { RequestHandler } from 'express'
-import { addCar, getCars, removeCar } from '@api/controllers'
+import { addCar, getCars, removeCar } from '@rest/controllers'
 
 interface Endpoint {
   method: 'post' | 'get' | 'delete'
