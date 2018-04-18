@@ -6,13 +6,11 @@
     "clean": "rm -rf dist",
     "webpack": "webpack --config webpack/",
     "rest": "node -r source-map-support/register dist/services/rest.bundle.js",
-    "graphql":
-      "node -r source-map-support/register dist/services/graphql.bundle.js",
+    "graphql": "node -r source-map-support/register dist/services/graphql.bundle.js",
     "ssr": "node -r source-map-support/register dist/services/ssr.bundle.js",
     "watch:webpack": "npm run webpack -- --watch",
     "watch:rest": "nodemon -w dist/services/rest.bundle.js -x 'npm run rest'",
-    "watch:graphql":
-      "nodemon -w dist/services/graphql.bundle.js -x 'npm run graphql'",
+    "watch:graphql": "nodemon -w dist/services/graphql.bundle.js -x 'npm run graphql'",
     "watch:ssr": "nodemon -w dist/services/ssr.bundle.js -x 'npm run ssr'"
   },
   "keywords": [],
@@ -69,6 +67,7 @@
     "mongodb": "^3.0.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "source-map-support": "^0.5.4"
+    "source-map-support": "^0.5.4",
+    "styled-components": "^3.2.6"
   }
 }

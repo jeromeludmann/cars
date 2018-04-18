@@ -1,5 +1,5 @@
 import React from 'react'
-const { title, emphased } = require('./style.css')
+import { Title, Emphased } from '@front/HelloWorld/ts/style'
 
 interface Props {
   name?: string
@@ -12,9 +12,9 @@ export default class HelloWorld extends React.Component<Props, {}> {
 
   public render() {
     return (
-      <h1 className={title}>
-        Hello <strong className={emphased}>{this.props.name}</strong>!
-      </h1>
+      <Title>
+        Hello <Emphased>{this.props.name}</Emphased>!
+      </Title>
     )
   }
 }
