@@ -1,18 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { ApolloProvider } from 'react-apollo'
-import apolloClient from '@front/apollo'
-import HelloJS from '@front/HelloWorld/javascript'
-import HelloTS from '@front/HelloWorld/typescript'
-import HelloApollo from '@front/HelloWorld/apollo'
+import HelloWorld from '@front/HelloWorld'
 
 render(
-  <ApolloProvider client={apolloClient}>
-    <div>
-      <HelloJS name='JavaScript' />
-      <HelloTS name='TypeScript' />
-      <HelloApollo />
-    </div>
-  </ApolloProvider>,
+  <div>
+    <HelloWorld name='You' />
+  </div>,
   document.getElementById('react-root-container')
 )
