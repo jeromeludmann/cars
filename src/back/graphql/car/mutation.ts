@@ -36,6 +36,20 @@ export const carMutation = new GraphQLObjectType({
           { ...existing, ...car }
         )).ok
       }
+    },
+    removeCar: {
+      type: GraphQLInt,
+      description: 'Remove a car',
+      args: {
+        name: {
+          type: GraphQLString,
+          description: 'The name of the car to delete',
+          defaultValue: '*'
+        }
+      },
+      resolve: async (_, { name }) => {
+        return (await carsCollection.findOneAndDelete({ name })).ok
+      }
     }
   }
 })
