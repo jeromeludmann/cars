@@ -27,7 +27,7 @@ exports.ts = {
 }
 
 exports.css = {
-  test: /\.css$/,
+  test: /\.s?css$/,
   use: [
     {
       loader: 'style-loader'
@@ -50,6 +50,9 @@ exports.css = {
           require('postcss-normalize')({ forceImport: true })
         ]
       }
+    },
+    {
+      loader: 'sass-loader'
     }
   ]
 }

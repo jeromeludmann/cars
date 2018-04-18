@@ -75,11 +75,17 @@ services:
 
 You can import samples into database by typing `./reset-db` (note that this will erase all the existing data).
 
-Having trouble with Docker?
+### Having trouble with Docker?
 
 In doubt, you could try `./dc-prune` to remove containers, networks and volumes.
 
 Then run again `./dc up`.
+
+### About CSS
+
+Note that you can now use SASS syntax, just by renaming your `.css` to `.scss`.
+
+Don't worry about vendor prefixing your CSS props: a tool named `autoprefix`, which is already included in the webpack process, is here for that.
 
 ## Git Best Practices
 
@@ -176,6 +182,8 @@ Moreover, there are 3 route types:
 
 ## REST API
 
+_Deprecated: use [GraphQL](#graphql-api) API instead_
+
 List of available endpoints:
 
 | Method | URL               | Description   |
@@ -186,7 +194,7 @@ List of available endpoints:
 
 ## GraphQL API
 
-_In progress._
+Go to http://localhost:8080/api/graphql and click on _Docs_ in the top right corner.
 
 ## TODO
 
