@@ -41,12 +41,15 @@ export const carQuery = new GraphQLObjectType({
           description: 'Number of cars to retrieve'
         }
       },
-      resolve: (_, { skip, limit }) =>
-        carsCollection
+      resolve: async (_, { skip, limit }) => {
+        await new Promise(resolve => setTimeout(resolve, 1000)) // TODO remove me
+
+        return carsCollection
           .find()
           .limit(limit)
           .skip(skip)
           .toArray()
+      }
     }
   }
 })
