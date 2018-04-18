@@ -1,5 +1,5 @@
 import React from 'react'
-import { Title, Emphased } from '@front/HelloWorld/ts/style'
+import { Title, Emphased } from '@front/HelloWorld/typescript/style'
 
 interface Props {
   name?: string
