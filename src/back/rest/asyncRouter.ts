@@ -5,9 +5,13 @@ import {
   Response,
   NextFunction
 } from 'express'
-import { endpoints } from '@rest/endpoints'
+import { PathParams } from 'express-serve-static-core'
 
-const asyncRouter = Router()
+export interface Route {
+  method?: 'post' | 'get' | 'put' | 'delete'
+  path?: PathParams
+  handler: RequestHandler
+}
 
 const catchAsyncErrors = (fn: RequestHandler) => (
   req: Request,
@@ -15,8 +19,14 @@ const catchAsyncErrors = (fn: RequestHandler) => (
   next: NextFunction
 ) => Promise.resolve(fn(req, res, next)).catch(next)
 
-for (const { method, path, handler } of endpoints) {
-  asyncRouter[method](path, catchAsyncErrors(handler))
+const AsyncRouter = (routes: Route[]) => {
+  const asyncRouter = Router()
+
+  for (const { method, path, handler } of routes) {
+    asyncRouter[method || 'use'](path || '/', catchAsyncErrors(handler))
+  }
+
+  return asyncRouter
 }
 
-export default asyncRouter
+export default AsyncRouter
