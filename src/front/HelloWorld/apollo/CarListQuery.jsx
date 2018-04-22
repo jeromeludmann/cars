@@ -5,7 +5,7 @@ import CarList from '@front/HelloWorld/apollo/CarList'
 
 export default graphql(gql`
   {
-    cars {
+    cars: getCars {
       name
       color
     }

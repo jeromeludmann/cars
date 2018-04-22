@@ -1,6 +1,6 @@
 import path from 'path'
 import express, { Request, Response } from 'express'
-import config from '@common/config'
+import { config } from '@common/config'
 import { startService } from '@common/service'
 
 const servePreRenderedHtml = (req: Request, res: Response) => {

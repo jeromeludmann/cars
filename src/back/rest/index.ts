@@ -1,7 +1,7 @@
 import express, { Application } from 'express'
 import { dbClient } from '@common/db'
 import { startService } from '@common/service'
-import config from '@common/config'
+import { config } from '@common/config'
 import { jsonBodyParser } from '@rest/middlewares'
 import errorHandler from '@rest/errorHandler'
 import routes from '@rest/routes'

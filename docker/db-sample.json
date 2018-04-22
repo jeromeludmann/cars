@@ -14,5 +14,13 @@
   {
     "name": "Vroum Vroum",
     "color": "blue"
+  },
+  {
+    "name": "Turbo",
+    "color": "red"
+  },
+  {
+    "name": "SuperCar",
+    "color": "red"
   }
 ]

@@ -194,24 +194,139 @@ List of available endpoints:
 
 ## GraphQL API
 
+See below examples about querying cars with GraphQL.
+
+_It may be needed to get a GraphQL client._
+
+### Filtering
+
+Request:
+
+```graphql
+query {
+  cars(filters: { color: "red" }) {
+    name
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "cars": [
+      {
+        "name": "Choupette"
+      },
+      {
+        "name": "Turbo"
+      },
+      {
+        "name": "SuperCar"
+      }
+    ]
+  }
+}
+```
+
+### Paging
+
+Request:
+
+```graphql
+query {
+  cars(paging: { page: 1, perPage: 4 }) {
+    name
+    color
+  }
+}
+```
+
+Response:
+
+```json
+{
+  "data": {
+    "cars": [
+      {
+        "name": "Choupette",
+        "color": "red"
+      },
+      {
+        "name": "Flying Delorean",
+        "color": "gray"
+      },
+      {
+        "name": "Vroum Vroum",
+        "color": "blue"
+      },
+      {
+        "name": "Turbo",
+        "color": "red"
+      }
+    ]
+  }
+}
+```
+
+Depending on your needs, you can combine:
+
+```
+query {
+  yellowCars: cars(
+    filters: { color: "yellow" }
+    paging: { page: 1 }
+  ) {
+    name
+    color
+  }
+
+  topCars: cars(
+    paging: { perPage: 3 }
+  ) {
+    name
+  }
+}
+```
+
+will return:
+
+```json
+{
+  "data": {
+    "yellowCars": [
+      {
+        "name": "Boumbo",
+        "color": "yellow"
+      }
+    ],
+    "topCars": [
+      {
+        "name": "Choupette"
+      },
+      {
+        "name": "Flying Delorean"
+      },
+      {
+        "name": "Vroum Vroum"
+      }
+    ]
+  }
+}
+```
+
 Go to http://localhost:8080/api/graphql and click on _Docs_ in the top right corner.
 
 ## TODO
 
 ### Required
 
-* Write React components
-* ~~Add type support (with Flow or TypeScript)~~
-* ~~Containerize a database (postgresql or mongodb)~~
-* ~~Set up REST API~~
-* Implement a React/Redux architecture
-  * Use components/containers (smart/dumb) React pattern
-* Write some tests about:
-  * API server endpoints
-  * React components
-* Set up production environment
+* Write React components + unit tests
+* Write GraphQL API unit tests
+* Set up a production environment with Docker
+* Replace MongoDB with PostgreSQL (or another great database system)
 
 ### Optional
 
-* ~~Set up GraphQL~~
-* Server Sider Rendering (SSR)
+* Experiment server rendering

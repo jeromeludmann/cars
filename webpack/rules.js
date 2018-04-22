@@ -21,7 +21,7 @@ exports.ts = {
     'ts-loader',
     {
       loader: 'tslint-loader',
-      options: { failOnHint: true }
+      options: { failOnHint: false }
     }
   ]
 }
