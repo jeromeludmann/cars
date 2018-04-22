@@ -1,5 +1,5 @@
 import React from 'react'
-import { title, emphased } from '@front/HelloWorld/style.css'
+import { title, emphased } from '@front/HelloWorld/style.scss'
 
 export default ({ name = 'World' }) => (
   <h1 className={title}>
