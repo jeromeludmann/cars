@@ -3,8 +3,6 @@ import { render } from 'react-dom'
 import HelloWorld from '@front/HelloWorld'
 
 render(
-  <div>
-    <HelloWorld name='You' />
-  </div>,
+  <HelloWorld name='You' />,
   document.getElementById('react-root-container')
 )
